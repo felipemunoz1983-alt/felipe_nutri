@@ -1,4 +1,787 @@
-index.html
-/css
-/js
-/img
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nutricionista Deportivo | Evaluación Metabólica. Planes 100% personalizados para pérdida de peso, ganancia muscular y rendimiento deportivo en Chile.">
+  <title>Nutricionista Felipe | Nutricionista Deportivo · Chile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky: #38BDF8;
+      --sky-mid: #0EA5E9;
+      --sky-deep: #0284C7;
+      --navy: #0C1A2E;
+      --navy-2: #1A2E44;
+      --white: #FFFFFF;
+      --off-white: #F8FAFC;
+      --gray-100: #F1F5F9;
+      --gray-200: #E2E8F0;
+      --gray-400: #94A3B8;
+      --gray-600: #4B6078;
+      --grad: linear-gradient(135deg, #0284C7 0%, #38BDF8 100%);
+      --grad-hero: linear-gradient(170deg, #060F1E 0%, #0A1F3A 50%, #060F1E 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--navy); background: var(--white); overflow-x: hidden; }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--gray-100); }
+    ::-webkit-scrollbar-thumb { background: var(--sky-mid); border-radius: 3px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 2.5rem; transition: all .35s ease;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,.93); backdrop-filter: blur(18px);
+      box-shadow: 0 2px 20px rgba(0,0,0,.08);
+    }
+    .nav-brand {
+      font-family: 'Poppins', sans-serif; font-weight: 800; font-size: .95rem;
+      letter-spacing: .04em; color: var(--white); text-decoration: none;
+      transition: color .3s;
+    }
+    nav.scrolled .nav-brand { color: var(--navy); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: .85rem; font-weight: 500; color: rgba(255,255,255,.8);
+      text-decoration: none; transition: color .2s;
+    }
+    nav.scrolled .nav-links a { color: var(--gray-600); }
+    .nav-links a:hover { color: var(--sky); }
+    nav.scrolled .nav-links a:hover { color: var(--sky-mid); }
+    .nav-cta {
+      background: var(--grad); color: var(--white) !important;
+      padding: .48rem 1.2rem; border-radius: 50px; font-weight: 700 !important;
+      font-size: .82rem !important; box-shadow: 0 4px 14px rgba(14,165,233,.45);
+      transition: all .2s !important;
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(14,165,233,.55) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; background: var(--grad-hero);
+      display: flex; align-items: center; justify-content: center;
+      padding: 100px 2rem 5rem; position: relative; overflow: hidden;
+    }
+    .hero-orb {
+      position: absolute; border-radius: 50%; pointer-events: none;
+    }
+    .hero-orb-1 {
+      width: 600px; height: 600px; top: -150px; right: -150px;
+      background: radial-gradient(circle, rgba(56,189,248,.12) 0%, transparent 70%);
+    }
+    .hero-orb-2 {
+      width: 400px; height: 400px; bottom: -100px; left: -100px;
+      background: radial-gradient(circle, rgba(14,165,233,.1) 0%, transparent 70%);
+    }
+    .hero-inner {
+      position: relative; z-index: 1; display: flex; flex-direction: column;
+      align-items: center; gap: 3.5rem; max-width: 960px; width: 100%;
+    }
+
+    /* ── IG CARD ── */
+    .ig-card {
+      width: 100%; max-width: 460px;
+      background: rgba(255,255,255,.04); backdrop-filter: blur(24px);
+      border: 1px solid rgba(56,189,248,.18); border-radius: 26px;
+      padding: 1.75rem; box-shadow: 0 30px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    .ig-top { display: flex; gap: 1.25rem; align-items: flex-start; margin-bottom: 1.1rem; }
+    .ig-ring {
+      flex-shrink: 0; width: 84px; height: 84px; border-radius: 50%;
+      padding: 3px; background: conic-gradient(#38BDF8, #0EA5E9, #93C5FD, #0284C7, #38BDF8);
+    }
+    .ig-ring img {
+      width: 100%; height: 100%; border-radius: 50%;
+      border: 3px solid #060F1E; object-fit: cover; display: block;
+      image-rendering: auto;
+    }
+    .ig-ring img[data-broken] {
+      display: none;
+    }
+    .ig-ring-fallback {
+      display: none; width: 100%; height: 100%; border-radius: 50%;
+      border: 3px solid #060F1E; background: linear-gradient(135deg, #0284C7, #38BDF8);
+      align-items: center; justify-content: center;
+      font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.4rem;
+      color: white; letter-spacing: .02em;
+    }
+    .ig-ring img[data-broken] + .ig-ring-fallback { display: flex; }
+    .ig-info { flex: 1; min-width: 0; }
+    .ig-name-row { display: flex; align-items: center; gap: .4rem; margin-bottom: .12rem; }
+    .ig-name {
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem;
+      color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .ig-badge {
+      flex-shrink: 0; width: 19px; height: 19px; border-radius: 50%;
+      background: var(--grad); display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(56,189,248,.6);
+    }
+    .ig-badge svg { width: 10px; height: 10px; }
+    .ig-handle {
+      display: block; font-size: .78rem; color: var(--sky);
+      text-decoration: none; margin-bottom: .3rem;
+    }
+    .ig-handle:hover { text-decoration: underline; }
+    .ig-cat { font-size: .7rem; color: rgba(255,255,255,.4); }
+
+    .ig-stats {
+      display: flex; border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px; overflow: hidden; margin-bottom: 1rem;
+    }
+    .ig-stat { flex: 1; text-align: center; padding: .55rem .4rem; }
+    .ig-stat + .ig-stat { border-left: 1px solid rgba(255,255,255,.1); }
+    .ig-stat-n {
+      font-family: 'Poppins', sans-serif; font-weight: 700;
+      font-size: .95rem; color: var(--white); line-height: 1.2;
+    }
+    .ig-stat-l { font-size: .6rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .06em; }
+
+    .ig-bio {
+      font-size: .82rem; color: rgba(255,255,255,.75);
+      line-height: 1.55; margin-bottom: .9rem;
+    }
+
+    .ig-btns { display: flex; gap: .5rem; margin-bottom: 1.25rem; }
+    .ig-btn {
+      flex: 1; padding: .48rem .4rem; border-radius: 9px;
+      font-size: .75rem; font-weight: 600; text-align: center;
+      text-decoration: none; border: none; cursor: pointer; transition: all .2s;
+    }
+    .ig-btn-fill { background: var(--grad); color: var(--white); box-shadow: 0 4px 12px rgba(56,189,248,.3); }
+    .ig-btn-fill:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(56,189,248,.45); }
+    .ig-btn-ghost { background: transparent; color: rgba(255,255,255,.75); border: 1px solid rgba(255,255,255,.2); }
+    .ig-btn-ghost:hover { background: rgba(255,255,255,.1); }
+
+    .ig-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; border-radius: 12px; overflow: hidden; }
+    .ig-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; transition: transform .3s; }
+    .ig-grid img:hover { transform: scale(1.06); }
+
+    /* ── HERO TEXT ── */
+    .hero-text { text-align: center; }
+    .hero-eyebrow {
+      display: inline-block; font-size: .72rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--sky);
+      border: 1px solid rgba(56,189,248,.3); border-radius: 50px;
+      padding: .35rem 1rem; margin-bottom: 1rem;
+    }
+    .hero-h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2.1rem,5.5vw,3.6rem); font-weight: 900;
+      color: var(--white); line-height: 1.12; margin-bottom: 1.2rem;
+    }
+    .hero-h1 em { font-style: normal; color: var(--sky); }
+    .hero-sub {
+      font-size: 1rem; color: rgba(255,255,255,.58); max-width: 500px;
+      line-height: 1.7; margin: 0 auto 1.75rem;
+    }
+    .community-pill {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(56,189,248,.1); border: 1px solid rgba(56,189,248,.25);
+      border-radius: 50px; padding: .5rem 1.25rem;
+      color: var(--sky); font-size: .88rem; font-weight: 600;
+    }
+
+    /* ── LAYOUT ── */
+    section { padding: 6rem 2rem; }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    .s-tag {
+      font-size: .72rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--sky-deep); margin-bottom: .65rem;
+    }
+    .s-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.7rem,3.5vw,2.6rem); font-weight: 800;
+      color: var(--navy); line-height: 1.2; margin-bottom: .9rem;
+    }
+    .s-desc { font-size: 1rem; color: var(--gray-600); line-height: 1.75; max-width: 600px; }
+
+    /* ── SOBRE MÍ ── */
+    .about { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-body { font-size: .97rem; color: var(--gray-600); line-height: 1.8; margin-bottom: 1.5rem; }
+    .pills { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 2rem; }
+    .pill {
+      display: inline-flex; align-items: center; gap: .3rem;
+      padding: .35rem .85rem; border-radius: 50px;
+      font-size: .78rem; font-weight: 600;
+    }
+    .pill-b { background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
+    .pill-c { background: #F0F9FF; color: #0369A1; border: 1px solid #BAE6FD; }
+    .pill-g { background: #F0FDF4; color: #166534; border: 1px solid #BBF7D0; }
+    .btns-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .8rem 1.75rem; border-radius: 50px;
+      font-size: .9rem; font-weight: 600; text-decoration: none;
+      transition: all .25s; border: none; cursor: pointer;
+    }
+    .btn-fill { background: var(--grad); color: var(--white); box-shadow: 0 6px 18px rgba(14,165,233,.35); }
+    .btn-fill:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(14,165,233,.45); }
+    .btn-line { background: transparent; color: var(--sky-deep); border: 2px solid var(--sky-deep); }
+    .btn-line:hover { background: var(--sky-deep); color: var(--white); }
+
+    .about-mosaic { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
+    .about-mosaic img {
+      width: 100%; aspect-ratio: 1; object-fit: cover;
+      border-radius: 16px; display: block; transition: transform .35s, box-shadow .35s;
+    }
+    .about-mosaic img:hover { transform: scale(1.03); box-shadow: 0 20px 40px rgba(0,0,0,.14); }
+    .about-mosaic img:first-child { grid-column: span 2; aspect-ratio: 16/9; }
+
+    /* ── SERVICIOS ── */
+    .services { background: var(--off-white); }
+    .services-head { margin-bottom: 3.5rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.5rem; }
+    .svc {
+      background: var(--white); border-radius: 20px; padding: 2rem;
+      border: 1px solid var(--gray-200); position: relative; overflow: hidden;
+      transition: all .3s ease;
+    }
+    .svc::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--grad); transform: scaleX(0); transform-origin: left;
+      transition: transform .35s ease;
+    }
+    .svc:hover { transform: translateY(-7px); box-shadow: 0 22px 44px rgba(14,165,233,.11); border-color: transparent; }
+    .svc:hover::after { transform: scaleX(1); }
+    .svc-ico {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: linear-gradient(135deg, #EFF6FF, #E0F2FE);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 1.25rem;
+    }
+    .svc-name { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; color: var(--navy); margin-bottom: .55rem; }
+    .svc-body { font-size: .875rem; color: var(--gray-600); line-height: 1.65; }
+    .svc-footer { margin-top: 3.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── GALERÍA ── */
+    .gallery { background: var(--white); }
+    .gallery-head { margin-bottom: 3rem; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: .65rem; }
+    .g-item { border-radius: 12px; overflow: hidden; position: relative; cursor: pointer; }
+    .g-item img {
+      width: 100%; aspect-ratio: 1; object-fit: cover;
+      display: block; transition: transform .5s ease;
+    }
+    .g-item:hover img { transform: scale(1.09); }
+    .g-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(2,132,199,.65), transparent);
+      opacity: 0; transition: opacity .3s;
+      display: flex; align-items: flex-end; padding: .75rem;
+    }
+    .g-item:hover .g-overlay { opacity: 1; }
+    .g-item.wide { grid-column: span 2; grid-row: span 2; }
+    .gallery-more { text-align: center; margin-top: 2.5rem; }
+
+    /* ── MÉTRICAS ── */
+    .metrics { background: var(--grad-hero); padding: 5rem 2rem; }
+    .metrics-grid {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      border-radius: 22px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .mitem {
+      padding: 2.75rem 1.5rem; text-align: center;
+      border-right: 1px solid rgba(255,255,255,.07);
+      transition: background .3s;
+    }
+    .mitem:last-child { border-right: none; }
+    .mitem:hover { background: rgba(255,255,255,.04); }
+    .mnum {
+      font-family: 'Poppins', sans-serif; font-size: 2.8rem;
+      font-weight: 900; color: var(--white); line-height: 1; margin-bottom: .4rem;
+    }
+    .mnum .accent { color: var(--sky); }
+    .mlabel { font-size: .78rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .09em; }
+
+    /* ── CONTACTO ── */
+    .contact { background: var(--off-white); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .booking-list { margin-top: 1.75rem; display: flex; flex-direction: column; gap: .75rem; }
+    .booking-link {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: 16px; padding: 1.1rem 1.25rem; text-decoration: none;
+      color: var(--navy); font-weight: 500; font-size: .9rem;
+      transition: all .25s;
+    }
+    .booking-link:hover { border-color: var(--sky-mid); box-shadow: 0 8px 24px rgba(14,165,233,.14); transform: translateX(5px); }
+    .booking-link-ico { font-size: 1.6rem; flex-shrink: 0; }
+    .booking-link-sub { font-size: .7rem; color: var(--gray-400); display: block; font-weight: 400; }
+    .booking-link-arr { margin-left: auto; color: var(--sky-mid); font-size: 1.1rem; }
+    .contact-meta { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+    .cmeta {
+      display: flex; align-items: center; gap: .9rem;
+    }
+    .cmeta-ico {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: linear-gradient(135deg,#E0F2FE,#BAE6FD);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .cmeta-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--gray-400); display: block; margin-bottom: 1px; }
+    .cmeta-val { font-size: .88rem; color: var(--navy); font-weight: 500; }
+    .cmeta-val a { color: var(--sky-mid); text-decoration: none; }
+    .cmeta-val a:hover { text-decoration: underline; }
+
+    .form { }
+    .fg { margin-bottom: 1.2rem; }
+    .fl { display: block; font-size: .82rem; font-weight: 600; color: var(--navy); margin-bottom: .45rem; }
+    .fi, .ft {
+      width: 100%; padding: .85rem 1rem;
+      border: 1.5px solid var(--gray-200); border-radius: 12px;
+      font-size: .9rem; font-family: 'Inter',sans-serif;
+      color: var(--navy); background: var(--white); outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .fi:focus, .ft:focus { border-color: var(--sky-mid); box-shadow: 0 0 0 3px rgba(14,165,233,.14); }
+    .ft { resize: vertical; min-height: 115px; }
+    .fsub {
+      width: 100%; background: var(--grad); color: var(--white); border: none;
+      padding: .95rem; border-radius: 12px; font-size: .95rem; font-weight: 700;
+      font-family: 'Poppins',sans-serif; cursor: pointer;
+      box-shadow: 0 6px 18px rgba(14,165,233,.3); transition: all .2s;
+    }
+    .fsub:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(14,165,233,.4); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy); color: rgba(255,255,255,.5);
+      padding: 3.5rem 2rem; text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Poppins',sans-serif; font-weight: 900;
+      font-size: 1.4rem; color: var(--white); margin-bottom: 1rem; letter-spacing: .02em;
+    }
+    .footer-nav {
+      display: flex; justify-content: center; gap: 2rem;
+      list-style: none; margin-bottom: 1.5rem;
+    }
+    .footer-nav a { color: rgba(255,255,255,.45); text-decoration: none; font-size: .83rem; transition: color .2s; }
+    .footer-nav a:hover { color: var(--sky); }
+    .footer-socials { display: flex; justify-content: center; gap: .75rem; margin-bottom: 2rem; }
+    .fsoc {
+      width: 40px; height: 40px; border-radius: 11px;
+      background: rgba(255,255,255,.07); display: flex; align-items: center;
+      justify-content: center; text-decoration: none; color: rgba(255,255,255,.55);
+      transition: all .2s;
+    }
+    .fsoc:hover { background: var(--sky-mid); color: var(--white); }
+    .footer-copy { font-size: .78rem; }
+
+    /* ── REVEAL ANIMATIONS ── */
+    .rv {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+    }
+    .rv.on { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; }
+    .d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; }
+    .d5 { transition-delay: .5s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .gallery-grid { grid-template-columns: repeat(3,1fr); }
+      .metrics-grid { grid-template-columns: repeat(2,1fr); }
+      .mitem:nth-child(2) { border-right: none; }
+      .mitem:nth-child(3) { border-right: 1px solid rgba(255,255,255,.07); border-top: 1px solid rgba(255,255,255,.07); }
+      .mitem:nth-child(4) { border-top: 1px solid rgba(255,255,255,.07); }
+    }
+    @media (max-width: 900px) {
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.25rem; }
+      .gallery-grid { grid-template-columns: repeat(2,1fr); }
+      .g-item.wide { grid-column: span 2; grid-row: span 1; }
+      .services-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .metrics-grid { grid-template-columns: 1fr 1fr; }
+      .ig-btns { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav id="nav">
+  <a href="#hero" class="nav-brand">NUTRICIONISTA FELIPE</a>
+  <ul class="nav-links">
+    <li><a href="#sobre-mi">Sobre mí</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="https://centrometabolico.site.agendapro.com/cl/sucursal/364121" class="nav-cta" target="_blank" rel="noopener">Reservar consulta →</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-inner">
+
+    <!-- Instagram Card -->
+    <div class="ig-card rv">
+      <div class="ig-top">
+        <div class="ig-ring">
+          <img src="assets/instagram/profile.jpg" alt="Foto de perfil de Nutricionista Felipe"
+               onerror="this.dataset.broken='1'">
+          <div class="ig-ring-fallback">NF</div>
+        </div>
+        <div class="ig-info">
+          <div class="ig-name-row">
+            <span class="ig-name">NUTRICIONISTA FELIPE</span>
+            <div class="ig-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+          </div>
+          <a href="https://www.instagram.com/nutricionista_felipe2014/" class="ig-handle" target="_blank" rel="noopener">@nutricionista_felipe2014</a>
+          <span class="ig-cat">Nutricionista Deportivo · Chile</span>
+        </div>
+      </div>
+
+      <div class="ig-stats">
+        <div class="ig-stat">
+          <div class="ig-stat-n">169</div>
+          <div class="ig-stat-l">Posts</div>
+        </div>
+        <div class="ig-stat">
+          <div class="ig-stat-n">2.567</div>
+          <div class="ig-stat-l">Seguidores</div>
+        </div>
+        <div class="ig-stat">
+          <div class="ig-stat-n">1.027</div>
+          <div class="ig-stat-l">Siguiendo</div>
+        </div>
+      </div>
+
+      <p class="ig-bio">Nutricionista Deportivo | Evaluación Metabólica Avanzada 🔬<br>
+      Transforma tu cuerpo y alcanza tu máximo rendimiento con planes 100% personalizados a tu metabolismo. Pérdida de peso · Masa muscular · Rendimiento deportivo. 📍 Chile</p>
+
+      <div class="ig-btns">
+        <a href="https://centrometabolico.site.agendapro.com/cl/sucursal/364121" class="ig-btn ig-btn-fill" target="_blank" rel="noopener">Reservar consulta</a>
+        <a href="https://www.instagram.com/nutricionista_felipe2014/" class="ig-btn ig-btn-ghost" target="_blank" rel="noopener">Ver Instagram</a>
+        <a href="mailto:felipe.muno1983@gmail.com" class="ig-btn ig-btn-ghost">Contactar</a>
+      </div>
+
+      <div class="ig-grid">
+        <img src="assets/instagram/post-2.jpg" alt="Post Instagram" loading="lazy">
+        <img src="assets/instagram/post-3.jpg" alt="Post Instagram" loading="lazy">
+        <img src="assets/instagram/post-4.jpg" alt="Post Instagram" loading="lazy">
+        <img src="assets/instagram/post-5.jpg" alt="Post Instagram" loading="lazy">
+        <img src="assets/instagram/post-7.jpg" alt="Post Instagram" loading="lazy">
+        <img src="assets/instagram/post-8.jpg" alt="Post Instagram" loading="lazy">
+      </div>
+    </div>
+
+    <!-- Hero text -->
+    <div class="hero-text rv d2">
+      <span class="hero-eyebrow">Nutricionista Deportivo · Chile</span>
+      <h1 class="hero-h1">Tu mejor versión<br>empieza por tu <em>metabolismo</em></h1>
+      <p class="hero-sub">Planes nutricionales completamente personalizados basados en tu evaluación metabólica. Sin dietas genéricas. Sin suposiciones. Solo ciencia aplicada a tu cuerpo.</p>
+      <div class="community-pill">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--sky)" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>+2.567 personas en comunidad</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SOBRE MÍ ── -->
+<section class="about" id="sobre-mi">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="rv">
+        <p class="s-tag">Sobre mí</p>
+        <h2 class="s-title">Nutrición que se<br>adapta a tu metabolismo</h2>
+        <p class="about-body">Soy nutricionista deportivo especializado en evaluación metabólica avanzada. Mi enfoque va más allá de las dietas genéricas: analizo en detalle tu metabolismo para diseñar planes que funcionen específicamente para ti.</p>
+        <p class="about-body">Ya sea que tu objetivo sea perder peso, ganar masa muscular o mejorar tu rendimiento deportivo, trabajo con evidencia científica y seguimiento personalizado para que llegues a tus metas de forma sostenible.</p>
+        <div class="pills">
+          <span class="pill pill-b">⚡ Evaluación Metabólica</span>
+          <span class="pill pill-c">🏋️ Nutrición Deportiva</span>
+          <span class="pill pill-g">📉 Pérdida de Peso</span>
+          <span class="pill pill-b">💪 Masa Muscular</span>
+          <span class="pill pill-c">🎯 Rendimiento</span>
+          <span class="pill pill-g">🔬 Basado en Evidencia</span>
+        </div>
+        <div class="btns-row">
+          <a href="https://centrometabolico.site.agendapro.com/cl/sucursal/364121" class="btn btn-fill" target="_blank" rel="noopener">Reservar consulta →</a>
+          <a href="https://reserva.alemana.cl/reserva/portal/resultado/profesional?empresa=1&profesional=7260422&fecha=01/05/2026" class="btn btn-line" target="_blank" rel="noopener">Clínica Alemana</a>
+        </div>
+      </div>
+      <div class="about-mosaic rv d2">
+        <img src="assets/instagram/post-9.jpg" alt="Nutricionista Felipe" loading="lazy">
+        <img src="assets/instagram/post-10.jpg" alt="Consulta nutricional" loading="lazy">
+        <img src="assets/instagram/post-11.jpg" alt="Nutrición deportiva" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICIOS ── -->
+<section class="services" id="servicios">
+  <div class="wrap">
+    <div class="services-head">
+      <p class="s-tag rv">Servicios</p>
+      <h2 class="s-title rv d1">Todo lo que necesitas para<br>alcanzar tus objetivos</h2>
+      <p class="s-desc rv d2">Cada plan parte de tu evaluación metabólica individual. Sin soluciones genéricas, solo estrategias diseñadas para tu cuerpo y tus metas.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc rv">
+        <div class="svc-ico">🔬</div>
+        <h3 class="svc-name">Evaluación Metabólica</h3>
+        <p class="svc-body">Análisis completo de tu metabolismo basal, composición corporal y parámetros fisiológicos para diseñar un plan nutricional verdaderamente personalizado y eficaz.</p>
+      </div>
+      <div class="svc rv d1">
+        <div class="svc-ico">🥗</div>
+        <h3 class="svc-name">Consulta Nutricional</h3>
+        <p class="svc-body">Asesoramiento integral con seguimiento continuo. Adaptamos tu plan según tu evolución, hábitos y estilo de vida para obtener resultados duraderos y reales.</p>
+      </div>
+      <div class="svc rv d2">
+        <div class="svc-ico">🎯</div>
+        <h3 class="svc-name">Pérdida de Peso</h3>
+        <p class="svc-body">Plan estructurado y sostenible para reducir grasa corporal sin sacrificar músculo ni calidad de vida. Basado en evidencia científica y adaptado a tu ritmo.</p>
+      </div>
+      <div class="svc rv d3">
+        <div class="svc-ico">💪</div>
+        <h3 class="svc-name">Aumento de Masa Muscular</h3>
+        <p class="svc-body">Nutrición estratégica sincronizada con tu entrenamiento para maximizar la ganancia muscular. Proteínas, carbohidratos y timing perfectamente calibrados.</p>
+      </div>
+      <div class="svc rv d4">
+        <div class="svc-ico">⚡</div>
+        <h3 class="svc-name">Rendimiento Deportivo</h3>
+        <p class="svc-body">Optimización nutricional para llevar tu rendimiento al máximo. Periodización, suplementación inteligente y estrategias de recuperación basadas en ciencia.</p>
+      </div>
+    </div>
+    <div class="svc-footer rv">
+      <a href="https://centrometabolico.site.agendapro.com/cl/sucursal/364121" class="btn btn-fill" target="_blank" rel="noopener">Reservar en Centro Metabólico →</a>
+      <a href="https://reserva.alemana.cl/reserva/portal/resultado/profesional?empresa=1&profesional=7260422&fecha=01/05/2026" class="btn btn-line" target="_blank" rel="noopener">Reservar en Clínica Alemana</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALERÍA ── -->
+<section class="gallery" id="galeria">
+  <div class="wrap">
+    <div class="gallery-head">
+      <p class="s-tag rv">Galería</p>
+      <h2 class="s-title rv d1">Mi contenido<br>en Instagram</h2>
+      <p class="s-desc rv d2">Sígueme en <a href="https://www.instagram.com/nutricionista_felipe2014/" style="color:var(--sky-mid);font-weight:600" target="_blank" rel="noopener">@nutricionista_felipe2014</a> para contenido diario sobre nutrición deportiva y salud.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="g-item wide rv"><img src="assets/instagram/post-2.jpg" alt="Instagram post" loading="lazy"><div class="g-overlay"></div></div>
+      <div class="g-item rv d1"><img src="assets/instagram/post-3.jpg" alt="Instagram post" loading="lazy"><div class="g-overlay"></div></div>
+      <div class="g-item rv d2"><img src="assets/instagram/post-4.jpg" alt="Instagram post" loading="lazy"><div class="g-overlay"></div></div>
+      <div class="g-item rv d1"><img src="assets/instagram/post-5.jpg" alt="Instagram post" loading="lazy"><div class="g-overlay"></div></div>
+      <div class="g-item rv d2"><img src="assets/instagram/post-6.jpg" alt="Instagram post" loading="lazy"><div class="g-overlay"></div></div>
+      <div class="g-item rv d3"><img src="assets/instagram/post-7.jpg" alt="Instagram post" loading="lazy"><div class="g-overlay"></div></div>
+      <div class="g-item rv d4"><img src="assets/instagram/post-8.jpg" alt="Instagram post" loading="lazy"><div class="g-overlay"></div></div>
+      <div class="g-item rv d1"><img src="assets/instagram/post-9.jpg" alt="Instagram post" loading="lazy"><div class="g-overlay"></div></div>
+      <div class="g-item rv d2"><img src="assets/instagram/post-10.jpg" alt="Instagram post" loading="lazy"><div class="g-overlay"></div></div>
+      <div class="g-item rv d3"><img src="assets/instagram/post-11.jpg" alt="Instagram post" loading="lazy"><div class="g-overlay"></div></div>
+      <div class="g-item rv d4"><img src="assets/instagram/post-12.jpg" alt="Instagram post" loading="lazy"><div class="g-overlay"></div></div>
+    </div>
+    <div class="gallery-more rv">
+      <a href="https://www.instagram.com/nutricionista_felipe2014/" class="btn btn-line" target="_blank" rel="noopener" style="margin-top:0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        Ver más en Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── MÉTRICAS ── -->
+<section class="metrics">
+  <div class="wrap">
+    <div class="metrics-grid">
+      <div class="mitem rv">
+        <div class="mnum"><span class="counter" data-target="2567">0</span></div>
+        <div class="mlabel">Seguidores</div>
+      </div>
+      <div class="mitem rv d1">
+        <div class="mnum"><span class="counter" data-target="169">0</span></div>
+        <div class="mlabel">Publicaciones</div>
+      </div>
+      <div class="mitem rv d2">
+        <div class="mnum"><span class="counter" data-target="5">0</span></div>
+        <div class="mlabel">Especialidades</div>
+      </div>
+      <div class="mitem rv d3">
+        <div class="mnum">100<span class="accent">%</span></div>
+        <div class="mlabel">Personalizado</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACTO ── -->
+<section class="contact" id="contacto">
+  <div class="wrap">
+    <div style="margin-bottom:3.5rem; max-width:580px">
+      <p class="s-tag rv">Contacto</p>
+      <h2 class="s-title rv d1">Empieza tu transformación hoy</h2>
+      <p class="s-desc rv d2">Agenda tu consulta o escríbeme directamente. Estoy aquí para ayudarte a alcanzar tus objetivos con un plan diseñado para ti.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="rv">
+        <h3 style="font-family:'Poppins',sans-serif;font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:.4rem">Reserva tu consulta</h3>
+        <p style="font-size:.875rem;color:var(--gray-600);margin-bottom:.25rem">Disponible en dos centros en Chile</p>
+        <div class="booking-list">
+          <a href="https://centrometabolico.site.agendapro.com/cl/sucursal/364121" class="booking-link" target="_blank" rel="noopener">
+            <span class="booking-link-ico">🔬</span>
+            <div>
+              <strong>Centro Metabólico</strong>
+              <span class="booking-link-sub">Reservar hora online</span>
+            </div>
+            <span class="booking-link-arr">→</span>
+          </a>
+          <a href="https://reserva.alemana.cl/reserva/portal/resultado/profesional?empresa=1&profesional=7260422&fecha=01/05/2026" class="booking-link" target="_blank" rel="noopener">
+            <span class="booking-link-ico">🏥</span>
+            <div>
+              <strong>Clínica Alemana</strong>
+              <span class="booking-link-sub">Reservar hora online</span>
+            </div>
+            <span class="booking-link-arr">→</span>
+          </a>
+        </div>
+        <div class="contact-meta">
+          <div class="cmeta">
+            <div class="cmeta-ico">📧</div>
+            <div>
+              <span class="cmeta-label">Email</span>
+              <span class="cmeta-val"><a href="mailto:felipe.muno1983@gmail.com">felipe.muno1983@gmail.com</a></span>
+            </div>
+          </div>
+          <div class="cmeta">
+            <div class="cmeta-ico">📱</div>
+            <div>
+              <span class="cmeta-label">Instagram</span>
+              <span class="cmeta-val"><a href="https://www.instagram.com/nutricionista_felipe2014/" target="_blank" rel="noopener">@nutricionista_felipe2014</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form rv d2">
+        <form onsubmit="sendForm(event)">
+          <div class="fg">
+            <label class="fl">Nombre</label>
+            <input type="text" class="fi" placeholder="Tu nombre completo" required>
+          </div>
+          <div class="fg">
+            <label class="fl">Email</label>
+            <input type="email" class="fi" placeholder="tu@email.com" required>
+          </div>
+          <div class="fg">
+            <label class="fl">Objetivo principal</label>
+            <input type="text" class="fi" placeholder="Perder peso, ganar músculo, mejorar rendimiento...">
+          </div>
+          <div class="fg">
+            <label class="fl">Mensaje</label>
+            <textarea class="ft" placeholder="Cuéntame sobre tus objetivos, rutina actual y cualquier información relevante..."></textarea>
+          </div>
+          <button type="submit" class="fsub">Enviar mensaje →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="wrap" style="max-width:720px">
+    <div class="footer-logo">NUTRICIONISTA FELIPE</div>
+    <ul class="footer-nav">
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/nutricionista_felipe2014/" class="fsoc" target="_blank" rel="noopener" title="Instagram">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+      <a href="mailto:felipe.muno1983@gmail.com" class="fsoc" title="Email">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+    <p class="footer-copy">© 2026 NUTRICIONISTA FELIPE · Todos los derechos reservados</p>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Reveal on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+  // Hero reveals on load
+  setTimeout(() => {
+    document.querySelectorAll('.hero .rv').forEach(el => el.classList.add('on'));
+  }, 120);
+
+  // Counter animation
+  const cObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting || e.target.dataset.done) return;
+      e.target.dataset.done = '1';
+      const target = +e.target.dataset.target;
+      let n = 0, step = target / 80;
+      const t = setInterval(() => {
+        n = Math.min(n + step, target);
+        e.target.textContent = Math.floor(n).toLocaleString('es-CL');
+        if (n >= target) clearInterval(t);
+      }, 20);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter').forEach(el => cObs.observe(el));
+
+  // Form
+  function sendForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.fsub');
+    btn.textContent = '¡Mensaje enviado! ✓';
+    btn.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+    setTimeout(() => {
+      btn.textContent = 'Enviar mensaje →';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3500);
+  }
+
+  // Subtle parallax on hero
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY;
+    if (s < window.innerHeight) {
+      document.querySelector('.hero').style.setProperty('--py', s * .35 + 'px');
+    }
+  }, { passive: true });
+</script>
+
+</body>
+</html>
